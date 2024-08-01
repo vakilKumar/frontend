@@ -28,6 +28,8 @@ const Login = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.message === 'Login successfully') {
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', data.user.role);
           alert('Login successful');
         } else {
           alert(data.message); // Show the error message
