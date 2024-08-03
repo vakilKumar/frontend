@@ -5,7 +5,6 @@ const Nav = () => {
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
-  console.log("----user-----", JSON.stringify(user));
 
   return (
     <div>
