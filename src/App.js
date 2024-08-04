@@ -8,25 +8,34 @@ import Login from './components/login';
 import DashBord from './screens/dashbord';
 import AddQuiz from './screens/addQuiz';
 import Logout from './components/logout';
+import { Provider } from 'react-redux';
+import store from './store';
+import ProductComponet from './pages/product';
+import Home from './pages/home';
+import Cart from './pages/cart';
 
 function App() {
   return (
     <div className="App">
+      <Provider store={store}>
       <BrowserRouter>
         <Nav />
         <Routes>
-          <Route path="/" element={<h1>Product component</h1>}/>
+          <Route path="/" element={<Home />}/>
+          <Route path="/home" element={<Home />}/>
           <Route path="/add" element={<h1>add component</h1>}/>
           <Route path="/dashbord" element={<DashBord/>}/>
-          <Route path="/logout" element={<Logout />}/>
+          {/* <Route path="/logout" element={<Logout />}/> */}
           <Route path="/profile" element={<h1>profile component</h1>}/>
           <Route path="/signup" element={<SignUp />}/>
-          <Route path="/qrcode" element={<QrCodePage />}/>
+          {/* <Route path="/qrcode" element={<QrCodePage />}/> */}
           <Route path="/login" element={<Login />}/>
-          <Route path="/addquiz" element={<AddQuiz />}/>
+          {/* <Route path="/addquiz" element={<AddQuiz />}/> */}
+          <Route path="/cart" element={<Cart/>}/>
         </Routes>
       </BrowserRouter>
-      <Footer />
+      {/* <Footer /> */}
+      </Provider>
     </div>
   );
 }
