@@ -13,6 +13,8 @@ import store from './store';
 import ProductComponet from './pages/product';
 import Home from './pages/home';
 import Cart from './pages/cart';
+import ProductDetail from './pages/admin';
+import AddProductPage from './pages/admin/addProduct';
 
 function App() {
   return (
@@ -25,7 +27,8 @@ function App() {
           <Route path="/home" element={<Home />}/>
           <Route path="/add" element={<h1>add component</h1>}/>
           <Route path="/dashbord" element={<DashBord/>}/>
-          {/* <Route path="/logout" element={<Logout />}/> */}
+          <Route path="/productDetail" element={<ProductDetail />}/>
+          <Route path="/addproduct" element={<AddProductPage />}/>
           <Route path="/profile" element={<h1>profile component</h1>}/>
           <Route path="/signup" element={<SignUp />}/>
           {/* <Route path="/qrcode" element={<QrCodePage />}/> */}

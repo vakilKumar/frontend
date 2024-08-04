@@ -23,6 +23,11 @@ function ProductComponet() {
     dummyProfileSelector.getCartData(),
     shallowEqual
   );
+  const allData = useSelector(
+    dummyProfileSelector.getDummyApiListData(),
+    shallowEqual
+  );
+
   const [productData, setProductData] = useState([]);
   const [productDataBack, setProductDataBack] = useState([]);
 
@@ -50,17 +55,25 @@ function ProductComponet() {
 
   useEffect(() => {
     apiCall()
+
+    console.log(allData)
+    setTimeout(() => {
+      setProductData(allData);
+      setProductDataBack(allData)
+    }, 500)
   }, []);
 
 
-  const apiCall = () => {
-    let response = fetch("https://fakestoreapi.com/products")
+  const apiCall = async () => {
+    let response = await fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
         setProductData(data);
         setProductDataBack(data)
         dispatch(setDummyApiData(data));
       });
+
+      
   }
 
 
