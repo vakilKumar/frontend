@@ -1,37 +1,39 @@
 import { Link } from "react-router-dom";
 import "../../App.css";
+import { shallowEqual, useSelector } from "react-redux";
+import { dummyProfileSelector } from "../../store/selectors";
+import { IconButton } from "@mui/material";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Nav = () => {
+  const cartData = useSelector(
+    dummyProfileSelector.getCartData(),
+    shallowEqual
+  );
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("user");
 
-
   return (
     <div>
-
-        {/* <li><Link to="/profile"> Profile</Link></li> */}
-        {!user ? (
-          <ul className="nav-ul">
-            <li>
-              <Link to="/signup">Signup</Link>
-            </li>
-            <li>
-              <Link to="/login"> Login</Link>
-            </li>
-          </ul>
-        ) : (
-          <ul className="nav-ul">
-            <li>
-              <Link to="/dashBord">DashBord</Link>
-            </li>
-            <li>
-              <Link to="/logout"> Logout</Link>
-            </li>
-            <li>
-              <Link to="/addquiz">Add quiz</Link>
-            </li>
-          </ul>
-        )}
+      <ul className="nav-ul">
+        <li>
+          <Link to="/signup">Signup</Link>
+        </li>
+        <li>
+          <Link to="/login"> Login</Link>
+        </li>
+        <li>
+          <Link to="/home">home</Link>
+        </li>
+        <li>
+          <Link to="/cart">
+            <IconButton color="primary" aria-label="add to shopping cart">
+              <AddShoppingCartIcon />
+            </IconButton>
+            {cartData?.length > 0 && " ( " + cartData?.length + " )"}
+          </Link>
+        </li>
+      </ul>
     </div>
   );
 };
