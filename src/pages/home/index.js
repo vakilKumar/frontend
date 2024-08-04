@@ -24,9 +24,9 @@ function Home() {
           display: "flex",
         }}
       >
-        <div className="filteMainIcon">
+        {/* <div className="filteMainIcon">
           <FilterComponet />
-        </div>
+        </div> */}
         <div>
           <ProductComponet />
         </div>

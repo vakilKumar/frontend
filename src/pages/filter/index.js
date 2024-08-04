@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Checkbox, FormControlLabel, FormGroup, Button, Box, Card } from '@mui/material';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { dummyProfileSelector } from '../../store/selectors';
+import { removeCartData } from '../../store/slice';
 
 
 const categories = [
@@ -17,12 +18,37 @@ const items = [
   { id: 4, name: 'Item 4', category: '3' },
 ];
 
-const FilterComponent = () => {
+const FilterComponent = ({onClick}) => {
+    let dispatch = useDispatch()
     const [selectedCategories, setSelectedCategories] = useState({});
+    const [filterData, setFilterData] = useState([])
     const cartData = useSelector(
       dummyProfileSelector.getDummyApiListData(),
       shallowEqual
     );
+
+
+    useEffect(() => {
+        let ans = [];
+        cartData.forEach((val) => {
+            let flag = false;
+            if(ans.length === 0 ){
+             ans.push(val)
+            } else {
+               for(let i = 0; i < ans.length; i++){
+                if( ans[i].category == val.category){
+                    flag = true
+                }
+               }
+            }
+
+            if(!flag){
+           ans.push(val)
+            }
+        })
+
+        setFilterData(ans)
+    }, [cartData])
 
     const handleCheckboxChange = (event) => {
         const { name, checked } = event.target;
@@ -36,13 +62,38 @@ const FilterComponent = () => {
         const filteredCategories = Object.keys(selectedCategories).filter(
             (key) => selectedCategories[key]
         );
+
+        let temp = []
+        cartData.forEach((val) => {
+            filteredCategories.forEach((ele) => {
+                if( val.id == ele){
+                  temp.push(val)
+                }
+            })
+        })
+
+        onClick(temp)
+
+    //     console.log('--- filteredCategories ----', filteredCategories)
+
+    //     let temp = []
+    //     cartData.forEach((val) => {
+    //         filteredCategories.forEach((ele) => {
+    //             if( val.id == ele){
+    //               temp.push(val)
+    //             }
+    //         })
+    //     })
+
+    // console.log(temp.length)
+    //     dispatch(removeCartData(temp));
     };
 
     return (
         <Card sx={{ mb: 3 , p: 2}}>
             <h3>Filter by Category</h3>
             <FormGroup>
-                {cartData?.map((category) => (
+                {filterData?.map((category) => (
                     <FormControlLabel
                         key={category.id}
                         control={

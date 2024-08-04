@@ -1,16 +1,20 @@
 // import React, { useEffect } from 'react';
-import { shallowEqual, useSelector } from "react-redux";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { dummyProfileSelector } from "../../store/selectors";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./styles.css";
-import { Card } from "@mui/material";
+import { Button, Card } from "@mui/material";
+import { removeCartData, setCartData } from "../../store/slice";
 
-const Cart = ({ cartItems = [{}], totalAmount }) => {
+const Cart = ({ cartItems = [{}] }) => {
   const cartData = useSelector(
     dummyProfileSelector.getCartData(),
     shallowEqual
   );
+  const dispatch = useDispatch();
+  const [productData, setProductData] = useState([]);
+  const [totalAmount, setTotalAmount] = useState(0)
   const handleCheckout = () => {
     // Handle checkout logic here (e.g., redirect to payment page)
     // alert('Proceeding to checkout...');
@@ -18,18 +22,61 @@ const Cart = ({ cartItems = [{}], totalAmount }) => {
     console.log("--- cartData ----", cartData);
   };
 
+
+  useEffect(() => {
+    setProductData(cartData)
+
+    let ans  = 0;
+    cartData.forEach((val) => {
+      ans = ans + val.price
+    })
+    setTotalAmount(ans)
+  },[])
+
+
+
+  const handleCount = (from, index, data) => {
+    let temp = productData.map((product) => ({ ...product }));
+
+    console.log('index', index)
+    console.log('temp', temp)
+    // let card = [...cartData];
+
+    if (from === "decrement") {
+      if (temp[index].count > 0) {
+        temp[index].count -= 1;
+       temp.pop();
+        dispatch(removeCartData(temp));
+      }
+    } else {
+      if (temp[index]?.count) {
+        temp[index].count += 1;
+      } else {
+        temp[index].count = 1;
+      }
+      // dispatch(setCartData(temp[index]));
+    }
+
+    let ans  = 0;
+    temp.forEach((val) => {
+      ans = ans + val.price
+    })
+    setTotalAmount(ans)
+
+    setProductData(temp);
+  };
+
   return (
     <div className="checkout-container">
-      <h2 style={{textAlign: 'center'}}>Checkout</h2>
+      <h2 style={{ textAlign: "center" }}>Checkout</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <div
           style={{
             display: "flex",
-            alignItems: 'center',
-            justifyContent: 'center',
-
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           {/* <div
@@ -38,9 +85,9 @@ const Cart = ({ cartItems = [{}], totalAmount }) => {
             backgroundColor: 'red'
           }}
           > */}
-          <Card sx={{padding: 15}}>
+          <Card sx={{ padding: 15 }}>
             <ul className="cart-items">
-              {cartData.map((item, index) => (
+              {productData.map((item, index) => (
                 <li key={index} className="cart-item">
                   <div className="item-details">
                     <img
@@ -54,6 +101,37 @@ const Cart = ({ cartItems = [{}], totalAmount }) => {
                       <p>Price: ${item.price.toFixed(2)}</p>
                     </div>
                   </div>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => handleCount("decrement", index)}
+                    sx={{
+                      backgroundColor: "#3f51b5",
+                      color: "#fff",
+                      "&:hover": {
+                        backgroundColor: "#303f9f",
+                      },
+                      padding: "6px 12px",
+                    }}
+                  >
+                    -
+                  </Button>
+                  <p style={{ margin: "0 10px" }}>{item?.count}</p>
+                  <Button
+                    size="small"
+                    color="primary"
+                    onClick={() => handleCount("increment", index)}
+                    sx={{
+                      backgroundColor: "#3f51b5",
+                      color: "#fff",
+                      "&:hover": {
+                        backgroundColor: "#303f9f",
+                      },
+                      padding: "6px 12px",
+                    }}
+                  >
+                    +
+                  </Button>
                 </li>
               ))}
             </ul>
@@ -63,7 +141,7 @@ const Cart = ({ cartItems = [{}], totalAmount }) => {
             <button className="checkout-button" onClick={handleCheckout}>
               Checkout
             </button>
-            </Card>
+          </Card>
           {/* </div> */}
         </div>
       )}

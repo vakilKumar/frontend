@@ -33,9 +33,17 @@ const dummyProfileSlice = createSlice({
                 ...state,
                 cartData: [...state.cartData, action.payload] 
             }
+        },
+
+        removeCartData: (state, action) => {
+            // state.cartData.push(action.payload);
+            return{
+                ...state,
+                cartData: action.payload
+            }
         }
     }
 })
 
-export const {setDummyApiData, setCartData} = dummyProfileSlice.actions;
+export const {setDummyApiData, setCartData, removeCartData} = dummyProfileSlice.actions;
 export const dummyProfileReducer = dummyProfileSlice.reducer;
