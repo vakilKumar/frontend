@@ -6,6 +6,7 @@ import {
   Typography,
   Button,
   Box,
+  Tooltip,
 } from "@mui/material";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import {
@@ -54,57 +55,59 @@ function ProductComponet() {
   };
 
   useEffect(() => {
-    apiCall()
+    // apiCall();
 
-    console.log(allData)
-    setTimeout(() => {
+    // console.log(allData);
+    // setTimeout(() => {
       setProductData(allData);
-      setProductDataBack(allData)
-    }, 500)
+      setProductDataBack(allData);
+    // }, 500);
   }, []);
-
 
   const apiCall = async () => {
     let response = await fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
         setProductData(data);
-        setProductDataBack(data)
+        setProductDataBack(data);
         dispatch(setDummyApiData(data));
       });
-
-      
-  }
-
-
+  };
 
   const onClick = async (filteredCategories) => {
-
-    if(filteredCategories.length === 0){
-      setProductData(productDataBack)
+    if (filteredCategories.length === 0) {
+      setProductData(productDataBack);
     } else {
-    let data = productDataBack.map((product) => ({ ...product }));
-    console.log('--- data ----', data)
-    let temp = []
-    data.forEach((val) => {
+      let data = productDataBack.map((product) => ({ ...product }));
+      console.log("--- data ----", data);
+      let temp = [];
+      data.forEach((val) => {
         filteredCategories.forEach((ele) => {
-            if( val.category == ele.category){
-              temp.push(val)
-            }
-        })
-    })
+          if (val.category == ele.category) {
+            temp.push(val);
+          }
+        });
+      });
 
-    console.log('--- temp ---', temp)
+      console.log("--- temp ---", temp);
 
-    setProductData(temp)
-  }
-  }
+      setProductData(temp);
+    }
+  };
+
+
+
+  const description = (val) => {
+     return val.description.length > 100 ? val.description.slice(0, 100) + '...' : val.description
+  };
   return (
-    <div style={{
-      display: 'flex'
-    }}>
-      <div style={{width: 400}}>
-      <FilterComponent onClick={onClick}/>
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      <div style={{ width: 400 }}>
+        <FilterComponent onClick={onClick} />
       </div>
       <div
         style={{
@@ -130,23 +133,43 @@ function ProductComponet() {
             return (
               <>
                 <Card
-                  style={{ maxWidth: 300, margin: "10px" }}
+                  style={{
+                    maxWidth: 200,
+                    maxHeight: "42rem",
+                    margin: "10px",
+                    background: "white",
+                    padding: "4px",
+                    textalign: "center",
+                    borderradius: "10px",
+                    display: "grid",
+
+                    //sgridgap: "20px",
+                  }}
                   key={index.toString()}
                 >
-                  <CardMedia
-                    component="img"
-                    height="140"
-                    image={val.image}
-                    alt="Random"
-                    style={{ objectFit: "cover" }}
-                  />
+                  <div>
+                    <CardMedia
+                      component="img"
+                      height="250"
+                      image={val.image}
+                      alt="Random"
+                      style={{
+                        objectFit: "cover",
+                        height: "14rem",
+                        width: "12rem",
+                      }}
+                    />
+                  </div>
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       {val.category}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {val.description}
-                    </Typography>
+                    <Tooltip title={val.description} arrow>
+                      <Typography variant="body2" color="text.secondary">
+                        {/* {val.description} */}
+                        {description(val)}
+                      </Typography>
+                    </Tooltip>
                     <Typography variant="body2" color="text.secondary">
                       <h3> Amount: ${val.price}</h3>
                     </Typography>
@@ -156,7 +179,7 @@ function ProductComponet() {
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "space-between",
-                      padding: "16px",
+                      padding: "10px",
                     }}
                   >
                     <Button
@@ -185,7 +208,7 @@ function ProductComponet() {
                         "&:hover": {
                           backgroundColor: "#303f9f",
                         },
-                        padding: "6px 12px",
+                        padding: "4px 10px",
                       }}
                     >
                       +

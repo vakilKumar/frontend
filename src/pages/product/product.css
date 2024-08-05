@@ -1,0 +1,35 @@
+.card {
+    max-width: 200px;  /* Set max width for cards */
+    max-height: 400px; /* Increased max height for better spacing */
+    margin: 10px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    display: flex;
+    flex-direction: column; /* Allow vertical stacking */
+}
+
+.card-media {
+    object-fit: cover; /* Ensure the image covers the card */
+    height: 400px; /* Fixed height for the image */
+}
+
+.card-content {
+    padding: 16px; /* Consistent padding for content */
+    flex-grow: 1; /* Allow content to grow */
+}
+
+.card-description {
+    margin-bottom: 3px; /* Spacing between description and amount */
+}
+
+.card-amount {
+    font-weight: bold; /* Make the amount bold */
+}
+
+.card-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px; /* Consistent padding */
+}
