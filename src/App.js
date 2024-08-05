@@ -15,6 +15,7 @@ import Home from './pages/home';
 import Cart from './pages/cart';
 import ProductDetail from './pages/admin';
 import AddProductPage from './pages/admin/addProduct';
+import UpdateProductPage from './pages/admin/UpdateProductPage';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path="/addproduct" element={<AddProductPage />}/>
           <Route path="/profile" element={<h1>profile component</h1>}/>
           <Route path="/signup" element={<SignUp />}/>
+          <Route path="/updateproduct" element={<UpdateProductPage />}/>
           {/* <Route path="/qrcode" element={<QrCodePage />}/> */}
           <Route path="/login" element={<Login />}/>
           {/* <Route path="/addquiz" element={<AddQuiz />}/> */}
