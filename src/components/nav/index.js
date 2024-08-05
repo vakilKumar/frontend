@@ -15,7 +15,7 @@ const Nav = () => {
 
   return (
     <div>
-      <ul className="nav-ul">
+      <ul className="nav-ul" >
         <li>
           <Link to="/signup">Signup</Link>
         </li>
@@ -28,6 +28,9 @@ const Nav = () => {
         <li>
           <Link to="/home">home</Link>
         </li>
+        {/* <li>
+          <Link to="/updateProductPage">home</Link>
+        </li> */}
         <li>
           <Link to="/cart">
             <IconButton color="primary" aria-label="add to shopping cart">
