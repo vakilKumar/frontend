@@ -37,37 +37,13 @@ const UpdateProductPage = () => {
     };
 
     const updateProduct = async () => {
-        // Update product logic here
-
         let temp = cartData.map((val) => ({ ...val }));
-
-        // console.log('------product -------', data);
-        
-        // Update the product in temp if the title matches
-        // temp = temp.map((val) => (val.title === product.title ? product : val));
-
         temp[id] = product
-        
-        console.log('------temp -------', temp);
-        
-        // Dispatch the updated temp array
         dispatch(setDummyApiData(temp));
     setProduct(item)
         navigate('/productDetail');
     };
 
-
-    // let temp = cartData.map((val) => ({ ...val }));
-
-    // console.log('------product -------', product)
-
-    // temp.forEach((val, index) => {
-    //     if(val.title === product.title){
-    //         temp[index] = product
-    //     }
-    // })
-    // dispatch(setDummyApiData(temp));
-    // setProduct(data)
 
     useEffect(() => {
         setProduct(item);
