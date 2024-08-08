@@ -79,7 +79,6 @@ function ProductComponet() {
       setProductData(productDataBack);
     } else {
       let data = productDataBack.map((product) => ({ ...product }));
-      console.log("--- data ----", data);
       let temp = [];
       data.forEach((val) => {
         filteredCategories.forEach((ele) => {
@@ -88,8 +87,6 @@ function ProductComponet() {
           }
         });
       });
-
-      console.log("--- temp ---", temp);
 
       setProductData(temp);
     }
