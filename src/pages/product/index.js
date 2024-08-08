@@ -142,8 +142,6 @@ function ProductComponet() {
                     textalign: "center",
                     borderradius: "10px",
                     display: "grid",
-
-                    //sgridgap: "20px",
                   }}
                   key={index.toString()}
                 >
