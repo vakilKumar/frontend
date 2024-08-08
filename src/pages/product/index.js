@@ -55,13 +55,8 @@ function ProductComponet() {
   };
 
   useEffect(() => {
-    // apiCall();
-
-    // console.log(allData);
-    // setTimeout(() => {
       setProductData(allData);
       setProductDataBack(allData);
-    // }, 500);
   }, []);
 
   const apiCall = async () => {
