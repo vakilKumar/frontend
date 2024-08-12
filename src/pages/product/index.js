@@ -60,6 +60,8 @@ function ProductComponet() {
   }, []);
 
   const apiCall = async () => {
+
+    
     let response = await fetch("https://fakestoreapi.com/products")
       .then((res) => res.json())
       .then((data) => {
