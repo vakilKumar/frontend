@@ -14,9 +14,6 @@ const Login = () => {
     setUserPass(e.target.value);
   };
 
-
-  
-
   const submiteBtn = () => {
     try {
       fetch("http://localhost:9000/api/login", {
