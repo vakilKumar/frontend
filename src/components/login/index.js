@@ -14,7 +14,7 @@ const Login = () => {
     setUserPass(e.target.value);
   };
 
-  
+
 
   const submiteBtn = () => {
     try {
@@ -41,7 +41,7 @@ const Login = () => {
       .catch((error) => console.error("Error:", error));
       
     } catch (error) {
-      console.log('----- error -------->>>>>>', error);
+      console.log('----- error --------', error);
     }
   };
 
