@@ -18,6 +18,9 @@ const items = [
   { id: 4, name: 'Item 4', category: '3' },
 ];
 
+
+
+
 const FilterComponent = ({onClick}) => {
     let dispatch = useDispatch()
     const [selectedCategories, setSelectedCategories] = useState({});
