@@ -11,6 +11,7 @@ const categories = [
   { id: '3', name: 'Category 3' },
 ];
 
+
 const items = [
   { id: 1, name: 'Item 1', category: '1' },
   { id: 2, name: 'Item 2', category: '2' },
