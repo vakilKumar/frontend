@@ -77,20 +77,9 @@ const FilterComponent = ({onClick}) => {
         onClick(temp)
 
 
-        
+
     //     console.log('--- filteredCategories ----', filteredCategories)
 
-    //     let temp = []
-    //     cartData.forEach((val) => {
-    //         filteredCategories.forEach((ele) => {
-    //             if( val.id == ele){
-    //               temp.push(val)
-    //             }
-    //         })
-    //     })
-
-    // console.log(temp.length)
-    //     dispatch(removeCartData(temp));
     };
 
     return (
