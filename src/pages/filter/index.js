@@ -77,9 +77,6 @@ const FilterComponent = ({onClick}) => {
         onClick(temp)
 
 
-
-    //     console.log('--- filteredCategories ----', filteredCategories)
-
     };
 
     return (
