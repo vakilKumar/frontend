@@ -76,6 +76,8 @@ const FilterComponent = ({onClick}) => {
 
         onClick(temp)
 
+
+        
     //     console.log('--- filteredCategories ----', filteredCategories)
 
     //     let temp = []
